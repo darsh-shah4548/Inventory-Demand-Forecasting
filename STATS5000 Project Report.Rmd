@@ -15,6 +15,12 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 # 1. Problem Statement
 Global Mart is online store super giant having worldwide operations. It takes orders and delivers across the globe and deals with all the major product categories - consumer, corporate & home office. The purpose of this project is to understand the what categories of products are the most profitable and during which months they are the most profitable. I also want to understand what market segment is most profitable and what kind of products are the most profitable in those market segments. It would also be interesting to understand what days are the most profitable for the store across the world and also in particular market segments. All these analyses should help the store get a broader idea of their profitability across the world and what products are bringing the most revenue.
 
+**Dataset URL:** https://raw.githubusercontent.com/vaibhavpalkar21/Time-Series-Retail-Giant-Sales-Forecasting/master/Global%20Superstore.csv
+
+**Github URL:** https://github.com/darsh-shah4548/Inventory-Demand-Forecasting
+
+
+
 ```{r include=FALSE}
 #Loading the libraries
 library(tidyr)
@@ -432,7 +438,7 @@ ggarrange(p, q, r, ncol = 1, nrow = 3)
 Fig 4.11: Trend of the 3 most profitable sub-categories of products in US.
 \end{center}
 
-# 4. Modelling
+# 5. Modelling
 
 Since i am confident the EU Market has been the most profitable globally and profit per million wise, I want to focus on modelling the EU Market for this project. An Extension of this project would also be modelling for the APAC Market which is also profitable worldwide and the US Market which is profitable population per million wise.
 
@@ -490,9 +496,9 @@ smoothing_fun <- function(x){
 Upon receiving feedback from the Professor regarding that my function was smoothing the data too much, i tried different combinations to try to consider the extreme peaks in the time-series. However, this turned out to be the best combination as the final predictions were the most accurate. 
 
 
-## 4.1 Modelling on EU Consumer Sales Data
+## 5.1 Modelling on EU Consumer Sales Data
 
-### 4.1.1 General Additive Model
+### 5.1.1 General Additive Model
 
 **Training the Model on first 42 months.**
 
@@ -628,7 +634,7 @@ After plotting predictions along with the original values, we can see that the m
 
 This was a General Additive Model which gave us an accuracy of around 76%. Let's do an ARIMA Model and see how much accuracy we get.
 
-### 4.1.2 ARIMA Model
+### 5.1.2 ARIMA Model
 ```{r}
 #now let's do an ARIMA fit
 
@@ -670,7 +676,7 @@ From the plot of predictions against the original values, we can see that the AR
 So, from the above two models we can conclude that the General Additive Model is better than the ARIMA Model.
 
 
-### 4.1.3 Prediction of sales for the next 3 Months
+### 5.1.3 Prediction of sales for the next 3 Months
 
 Now that we have determined which is the better model (GAM Model), we can now predict the estimated sales of the store in the next 3 months.
 ```{r}
@@ -739,11 +745,11 @@ abline(v=48, col = "red")
 ```
 We can see that for the next 3 months, the sales of the store are going to go down.
 
-## 4.2 Modelling on EU Consumer Quanitity Data
+## 5.2 Modelling on EU Consumer Quanitity Data
 
 This process is going to be similar to the sales data but instead of sales we'll be determining the stock of quantity that the store should have for the next 3 months.
 
-### 4.2.1 General Additive Model
+### 5.2.1 General Additive Model
 
 ```{r}
 #Let's create the model using the first 42 rows.
@@ -841,7 +847,7 @@ lines(class_dec_pred, col = "red")
 The GAM Model has done a good job in predicting the quantities. It has taken into considerations the peaks and dips of the time series. However, it is predicting a continuous upward trend after the 35th month indicating there would a constant rise in the stock of products. But that is not the case, as there have been some dips after the 35th Month.
 
 
-### 4.2.2 ARIMA Model
+### 5.2.2 ARIMA Model
 
 ```{r}
 #now let's do an ARIMA fit
@@ -876,7 +882,7 @@ lines(auto_arima_pred_EU_quantity, col = "red")
 The ARIMA model is also not that bad as it is taking into consideration some of the peaks and dips. But comparing the GAM and Additive model, i think the GAM Model is doing a better job over here as well.
 
 
-### 4.2.3 Prediction of quantity for the next 6 Months
+### 5.2.3 Prediction of quantity for the next 6 Months
 
 Now that we have determined which is the better model (GAM Model), we can now predict the estimated quantity for the next 3 months.
 
@@ -955,7 +961,7 @@ plot(EU_Consumer_tot1$monthly_qty, col = "black", type = "l")
 abline(v=48, col = "red")
 ```
 
-# 5. Conclusion
+# 6. Conclusion
 
 1. Based on the data provided, we identified the two most profitable segments worldwide which are APAC_Consumer and EU_Consumer.
 
@@ -976,3 +982,7 @@ abline(v=48, col = "red")
 9. EU Consumer Quantity is likely to drop during initial 1 or 2 months & then rise rapidly in next 3 months, eventually reaching a plateau.
 
 
+
+# 7. References
+
+[1] https://github.com/vaibhavpalkar21/Time-Series-Retail-Giant-Sales-Forecasting
